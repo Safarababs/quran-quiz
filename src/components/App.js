@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import swal from "sweetalert";
-import questions from "./Questions";
+import questions from "./Demo";
 
 
 const App = () => {
@@ -136,7 +136,7 @@ const App = () => {
           <p>City: {userData.city}</p>
           <p>Total Marks: {calculateMarks().totalMarks}</p>
           <p>Obtained Marks: {calculateMarks().obtainedMarks}</p>
-          <h3>Question-wise Results:</h3>
+          <h3 style={{color:"white"}}>Question-wise Results:</h3>
           {calculateMarks().resultDetails.map((result, index) => (
             <div key={index}>
               <p className="questions">
