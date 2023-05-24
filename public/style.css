@@ -109,7 +109,6 @@
 }
 
 .results {
-  margin-top: 20px;
   padding: 20px;
   background-color: #f2f2f2;
   background-image: url("./images/1.jpg");
@@ -127,11 +126,12 @@
   font-size: 2rem;
   border: solid 1px white;
   color: white;
+  padding: 1rem;
 }
 @media (max-width: 768px) {
   .results p {
     font-size: 1.5rem;
-    border: solid 1px white;
+    border: solid 1px black;
     color: white;
   }
 }
@@ -139,14 +139,11 @@
 .results .questions {
   margin-bottom: 10px;
   font-size: 2rem;
-  border: solid 1px black;
-  color: black;
+  color: white;
 }
 @media (max-width: 768px) {
   .results .questions {
     font-size: 1.5rem;
-    border: solid 1px black;
-    color: black;
   }
 }
 
@@ -163,7 +160,7 @@
 .results div {
   margin-bottom: 20px;
   padding: 10px;
-  background-color: #dfc7d4;
+  background-color: rgba(212, 142, 206, 0.5);
   border: 1px solid #550505;
   border-radius: 4px;
   color: black;
@@ -218,7 +215,6 @@
 @media (max-width: 768px) {
   .question-container p {
     font-size: 1.5rem;
-    border: solid 0.1rem red;
     background-color: #90d896;
     text-align: right;
   }
@@ -231,14 +227,20 @@
 }
 @media (max-width: 768px) {
   .question-container label {
-    font-size: 1rem;
+    font-size: 1.5rem;
   }
 }
 
 .question-container input[type=radio] {
-  margin-right: 5px;
+  margin: 1rem 0.5rem 1rem 1rem;
   width: 1rem;
   height: 1rem;
+}
+@media (max-width: 768px) {
+  .question-container input[type=radio] {
+    width: 1rem;
+    height: 1rem;
+  }
 }
 
 .question-container button {
