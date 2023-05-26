@@ -1,25 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import swal from "sweetalert";
-import questions from "./Questions";
+import questions from "./Demo";
 
-const shuffleArray = (array) => {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
-  }
-  return array;
-};
 
 const App = () => {
-  
-
-  const [shuffledQuestions, setShuffledQuestions] = useState([]);
   const [userData, setUserData] = useState({
     name: "",
     phoneNumber: "",
-    city: "",
+    city: ""
   });
+
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState(new Array(questions.length).fill(null));
   const [showUserForm, setShowUserForm] = useState(true);
@@ -47,7 +38,7 @@ const App = () => {
         const errors = {
           name: !userData.name,
           phoneNumber: !userData.phoneNumber,
-          city: !userData.city,
+          city: !userData.city
         };
         setFormErrors(errors);
       } else {
@@ -55,7 +46,7 @@ const App = () => {
         setShowUserForm(false);
       }
     } else {
-      if (currentQuestionIndex === shuffledQuestions.length - 1) {
+      if (currentQuestionIndex === questions.length - 1) {
         setShowResults(true);
         saveUserDataAndAnswers();
       } else {
@@ -64,19 +55,12 @@ const App = () => {
     }
   };
 
-  const handleBackClick = () => {
-    if (currentQuestionIndex === 0) {
-      return;
-    }
-    setCurrentQuestionIndex((prevIndex) => prevIndex - 1);
-  };
-
   const calculateMarks = () => {
-    let totalMarks = shuffledQuestions.length;
+    let totalMarks = questions.length;
     let obtainedMarks = 0;
     let resultDetails = [];
 
-    shuffledQuestions.forEach((question, index) => {
+    questions.forEach((question, index) => {
       const answer = answers[index];
       const isCorrect = answer === question.correctAnswer;
       if (isCorrect) {
@@ -96,6 +80,7 @@ const App = () => {
     const city = userData.city;
     const data = { name, phoneNumber, city, obtainedMarks };
 
+    // Display "Please wait" message
     swal("Please wait", "We are saving", "warning");
 
     axios.post("http://localhost:5000/result", data).then((res) => {
@@ -112,16 +97,6 @@ const App = () => {
       }
     });
   };
-
-  useEffect(() => {
-    const shuffledArray = shuffleArray(questions.map((question) => {
-      return {
-        ...question,
-        options: shuffleArray(question.options),
-      };
-    }));
-    setShuffledQuestions(shuffledArray);
-  }, []);
 
   return (
     <div className="container">
@@ -141,9 +116,7 @@ const App = () => {
             name="phoneNumber"
             value={userData.phoneNumber}
             onChange={handleUserDataChange}
-            placeholder={
-              formErrors.phoneNumber ? "Phone Number is required" : "Phone Number"
-            }
+            placeholder={formErrors.phoneNumber ? "Phone Number is required" : "Phone Number"}
             className={formErrors.phoneNumber ? "error" : ""}
           />
           <input
@@ -163,61 +136,51 @@ const App = () => {
           <p>City: {userData.city}</p>
           <p>Total Marks: {calculateMarks().totalMarks}</p>
           <p>Obtained Marks: {calculateMarks().obtainedMarks}</p>
-          <h3 style={{ color: "white" }}>Question-wise Results:</h3>
+          <h3 style={{color:"white"}}>Question-wise Results:</h3>
           {calculateMarks().resultDetails.map((result, index) => (
             <div key={index}>
               <p className="questions">
                 Question {index + 1}: {result.question.question}
               </p>
-              <p className="questions">
-                Correct Answer: {result.question.correctAnswer}
-              </p>
+              <p className="questions">Correct Answer: {result.question.correctAnswer}</p>
               <p className="questions">Your Answer: {result.answer}</p>
 
               {result.isCorrect ? (
                 <p className="questions">
-                  Correct Answer:{" "}
-                  <span style={{ color: "green", width:"1rem" , height: "1rem"}}>&#10004;</span>
+                  درست جواب: <span style={{ color: "green" }}>&#10004;</span>
                 </p>
               ) : (
                 <p className="questions">
-                  Wrong Answer: <span style={{ color: "red",width:"1rem", height: "1rem" }}>&#10006;</span>
+                  غلط جواب: <span style={{ color: "red" }}>&#10006;</span>
                 </p>
               )}
             </div>
           ))}
         </div>
       ) : (
-        <div className="question-container">
-          <h2>Question {currentQuestionIndex + 1}</h2>
-          <p>{shuffledQuestions[currentQuestionIndex].question}</p>
-          <div className="options">
-            {shuffledQuestions[currentQuestionIndex].options.map((option, index) => (
-              <div key={index}>
+        questions.length > 0 &&
+        currentQuestionIndex < questions.length && (
+          <div className="question-container">
+            <p>{questions[currentQuestionIndex].question}</p>
+            {questions[currentQuestionIndex].options.map((option, index) => (
+              <label key={index}>
                 <input
                   type="radio"
-                  name="option"
+                  name="answer"
                   value={option}
-                  onChange={handleAnswerSelect}
                   checked={answers[currentQuestionIndex] === option}
+                  onChange={handleAnswerSelect}
                 />
-                <label>{option}</label>
-              </div>
+                {option}
+              </label>
             ))}
-          </div>
-          <div className="navigation-buttons">
-            {currentQuestionIndex > 0 && (
-              <button onClick={handleBackClick}>Back</button>
-            )}
             <button onClick={handleNextClick}>
-              {currentQuestionIndex === shuffledQuestions.length - 1
-                ? "Submit"
-                : "Next"}
+              {currentQuestionIndex === questions.length - 1 ? "Submit" : "Next"}
             </button>
           </div>
-        </div>
+        )
       )}
-      {isLoading && <div className="loading">Saving results...</div>}
+      {isLoading && <p>Loading...</p>}
     </div>
   );
 };

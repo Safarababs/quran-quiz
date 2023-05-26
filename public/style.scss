@@ -166,7 +166,7 @@ $secondary-color: #e67e22;
 .results div {
   margin-bottom: 20px;
   padding: 10px;
-  background-color: rgba(212, 142, 206, 0.5);
+  background-color: rgba(237, 227, 236, .5);
   border: 1px solid #550505;
   border-radius: 4px;
   color: black;
@@ -208,6 +208,10 @@ $secondary-color: #e67e22;
   @media (max-width: 576px) {
     margin: 15px;
   }
+
+  .options {
+    display: inline-block;
+  }
 }
 
 .question-container p {
@@ -216,7 +220,7 @@ $secondary-color: #e67e22;
   font-size: 4rem;
 
   @media (max-width: 768px) {
-    font-size: 1.5rem;
+    font-size: 2rem;
     background-color: #90d896;
     text-align: right;
   }
@@ -226,6 +230,7 @@ $secondary-color: #e67e22;
   display: block;
   margin-bottom: 5px;
   font-size: 3rem;
+  display: inline;
 
   @media (max-width: 768px) {
     font-size: 1.5rem;

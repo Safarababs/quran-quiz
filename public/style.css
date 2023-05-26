@@ -160,7 +160,7 @@
 .results div {
   margin-bottom: 20px;
   padding: 10px;
-  background-color: rgba(212, 142, 206, 0.5);
+  background-color: rgba(237, 227, 236, 0.5);
   border: 1px solid #550505;
   border-radius: 4px;
   color: black;
@@ -206,6 +206,9 @@
     margin: 15px;
   }
 }
+.question-container .options {
+  display: inline-block;
+}
 
 .question-container p {
   margin-bottom: 10px;
@@ -214,7 +217,7 @@
 }
 @media (max-width: 768px) {
   .question-container p {
-    font-size: 1.5rem;
+    font-size: 2rem;
     background-color: #90d896;
     text-align: right;
   }
@@ -224,6 +227,7 @@
   display: block;
   margin-bottom: 5px;
   font-size: 3rem;
+  display: inline;
 }
 @media (max-width: 768px) {
   .question-container label {
