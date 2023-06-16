@@ -279,7 +279,7 @@ function CodeComponent() {
                   </h4>
                   <h6 className="w3-text-teal">
                     <i className="fa fa-calendar fa-fw w3-margin-right"></i>
-                    November 2020 -{" "}
+                    October 2020 -{" "}
                     <span className="w3-tag w3-teal w3-round">Current</span>
                   </h6>
                   <hr></hr>
@@ -316,7 +316,7 @@ function CodeComponent() {
                 <div className="w3-container">
                   <h4 className="w3-opacity">
                     <b>
-                      mechanical technician, neelam jehlum hydro electric plant,
+                      Shift Engineer, neelam jehlum hydro electric plant,
                       PK / Wartsila ( W9L32 ) 12MW + 1mW CAT-3512
                     </b>
                   </h4>
