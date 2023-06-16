@@ -21,7 +21,7 @@ function CodeComponent() {
                       style={{
                         color: "white",
                         background: "teal",
-                        width: "15rem",
+                        width: "20rem",
                         textAlign: "center",
                         borderRadius: "10px",
                       }}
