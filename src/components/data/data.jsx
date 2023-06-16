@@ -26,7 +26,7 @@ function CodeComponent() {
                         borderRadius: "10px",
                       }}
                     >
-                      Shahzad Aslam
+                      M.Shahzad Aslam
                     </h2>
                   </div>
                 </div>
